@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Test / coverage
+coverage/
+playwright-report/
+test-results/
+blob-report/
+.vitest/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Database / local data
+*.sqlite
+*.sqlite3
+postgres-data/
+redis-data/
+
+# Misc
+.cache/
+.tmp/
+.pnpm-store/

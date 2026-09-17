@@ -1,0 +1,23 @@
+{
+  "name": "@supercore/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc --noEmit",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@supercore/core": "workspace:*",
+    "@supercore/events": "workspace:*",
+    "bullmq": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

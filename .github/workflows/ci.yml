@@ -1,0 +1,73 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: supercore
+          POSTGRES_PASSWORD: supercore
+          POSTGRES_DB: supercore
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U supercore -d supercore"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgres://supercore:supercore@localhost:5432/supercore
+      REDIS_URL: redis://localhost:6379
+      API_URL: http://127.0.0.1:4000
+      WEB_URL: http://127.0.0.1:3000
+      ADMIN_URL: http://127.0.0.1:3001
+      NEXT_PUBLIC_API_URL: http://127.0.0.1:4000
+      AUTH_DEV_BYPASS: 'false'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.20.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Unit tests
+        run: pnpm test
+      - name: Migrate
+        run: pnpm db:migrate
+      - name: Integration tests
+        run: pnpm test
+        env:
+          RUN_INTEGRATION: '1'
+      - name: Build
+        run: pnpm build
+      - name: Production audit
+        run: pnpm security:audit
+        continue-on-error: true

@@ -1,0 +1,37 @@
+{
+  "name": "supercore-commerce-os",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Supercore Commerce OS — modular monolith platform foundation",
+  "type": "module",
+  "packageManager": "pnpm@11.20.0",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @supercore/api --filter @supercore/web --filter @supercore/admin --filter @supercore/worker dev",
+    "build": "pnpm --filter @supercore/core --filter @supercore/identity --filter @supercore/events --filter @supercore/integrations --filter @supercore/search --filter @supercore/files --filter @supercore/api --filter @supercore/worker --filter @supercore/web --filter @supercore/admin build",
+    "lint": "eslint .",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "db:generate": "pnpm --filter @supercore/core db:generate",
+    "db:migrate": "pnpm --filter @supercore/core db:migrate",
+    "db:studio": "pnpm --filter @supercore/core db:studio",
+    "worker": "pnpm --filter @supercore/worker dev",
+    "security:audit": "pnpm audit --prod"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "1.55.1",
+    "@types/node": "^24.5.2",
+    "eslint": "catalog:",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vitest": "catalog:"
+  }
+}
