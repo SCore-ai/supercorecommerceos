@@ -10,7 +10,7 @@ Phase 1 Platform Core is **implemented** on `master` at `7de6c75` (2026-10-05). 
 |---|---|
 | Product Vision and Phase Roadmap v1.1 | Active sequence (P0–P7) |
 | Phase 0 Bootstrap Master Prompt | Historical foundation prompt |
-| Phase 0 Completion Audit | Local completion report; remote CI run still to be bound after the workflow listens to `master` |
+| Phase 0 Completion Audit | Local completion report; remote CI bound to Actions run 37339984665 (`a0d709f`) |
 | Phase 1 Platform Core | Implementation spec — code on `7de6c75`; §15 aligned 2026-10-05 |
 | Phase 2 Supercore Commerce Engine | Charter |
 | Phase 3 Supercore B2B and CRM | Charter |

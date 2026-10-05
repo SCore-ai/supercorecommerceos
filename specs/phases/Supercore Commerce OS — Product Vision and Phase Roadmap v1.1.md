@@ -138,7 +138,7 @@ Canonical: `specs/architecture/Supercore Commerce OS — Development Agent Archi
 
 # 5. Current position
 
-Phase 0 foundation is in the repository (see Phase 0 Completion Audit). Local checks were reported during implementation. Remote CI did not run on `7de6c75` because `.github/workflows/ci.yml` triggered on `main` while the default branch is `master`. The close-out points that trigger at `master`. Phase 0 objective 22 stays open until an Actions run URL is bound to the close-out commit.
+Phase 0 foundation is in the repository (see Phase 0 Completion Audit). Local checks were reported during implementation. Remote CI did not run on `7de6c75` because `.github/workflows/ci.yml` triggered on `main` while the default branch is `master`. The close-out points that trigger at `master`. [Actions run 37339984665](https://github.com/SCore-ai/supercorecommerceos/actions/runs/37339984665) succeeded for `a0d709f`.
 
 Phase 1 Platform Core is implemented on `master` at `7de6c75` (2026-10-05, full SHA `7de6c75c9bcd1dbe70b725d18b8088580c5497ea`). That commit has first-party auth, session-derived tenant isolation, RBAC, customer and supplier master data, addresses, country and currency seed, and same-transaction audit. **§17 blockers are closed** (same day; ADR-006 amendment, ADR-009). **§15 Definition of Done is aligned to that commit.** Phase 2 code has not started.
 
@@ -152,7 +152,7 @@ Phases 2–7 are direction charters. Detailed pricing, VAT rates, ledger charts,
 
 Platform bootstrap: monorepo, API, web, admin, Postgres, Redis, worker, tests, CI workflow, adapter interfaces.
 
-Local implementation is reported in the Completion Audit. Bind logs and a remote CI run to a commit before calling the phase independently verified.
+Local implementation is reported in the Completion Audit. Remote CI is bound to `a0d709f` (Actions run 37339984665).
 
 ## Phase 1 — Platform Core
 

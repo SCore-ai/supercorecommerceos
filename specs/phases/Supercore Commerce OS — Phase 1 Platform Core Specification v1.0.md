@@ -556,7 +556,7 @@ Minimum:
 
 Aligned 2026-10-05 to `master` commit `7de6c75` (`7de6c75c9bcd1dbe70b725d18b8088580c5497ea`). Phase 2 code has not started.
 
-Local checks on that tree, re-run during this close-out: lint pass, typecheck pass, Vitest **37/37** with `RUN_INTEGRATION=1` (32 unit tests plus Postgres, Redis, worker, and `packages/identity/src/phase1.integration.test.ts`), and Playwright **6/6**. GitHub Actions did not run on `7de6c75` because the workflow listened to `main`. The trigger is corrected to `master` in the close-out; the Actions run is for that later commit and is recorded under Phase 0 objective 22.
+Local checks on that tree, re-run during this close-out: lint pass, typecheck pass, Vitest **37/37** with `RUN_INTEGRATION=1` (32 unit tests plus Postgres, Redis, worker, and `packages/identity/src/phase1.integration.test.ts`), and Playwright **6/6**. GitHub Actions did not run on `7de6c75` because the workflow listened to `main`. The trigger is `master` as of `a0d709f`. [Actions run 37339984665](https://github.com/SCore-ai/supercorecommerceos/actions/runs/37339984665) succeeded for that commit (lint, typecheck, unit, migrate, integration, build). Playwright stays local; the workflow does not invoke it.
 
 - [x] Section 17 blockers are closed by product/security (ADR-006 amendment, ADR-009)
 - [x] Migrations create the Phase 1 tables — `packages/core/drizzle/0001_phase1_platform_core.sql` (tenants, organizations, users, memberships, roles, sessions, invitations, countries, currencies, customers, suppliers, addresses, audit_records)
@@ -568,7 +568,7 @@ Local checks on that tree, re-run during this close-out: lint pass, typecheck pa
 - [x] Country and currency reference data is available — `seedReferenceData()` runs at the end of `pnpm db:migrate` (ISO countries and currencies).
 - [x] Audit records persist — party, address, and tenant mutations call `insertAuditRecord` in the same Postgres transaction as the write.
 - [x] Admin screens exist for the entities above (production UI in this repo, not a Lovable-only export) — `apps/admin` sign-in, tenants, tenant, organizations, users, customers, suppliers, addresses, audit. Screens call the HTTP API.
-- [x] Lint, typecheck, unit, integration, and relevant e2e tests pass — local on 2026-10-05: lint, typecheck, Vitest 37/37 with `RUN_INTEGRATION=1`, and Playwright 6/6 (`tests/e2e/phase0.spec.ts`: sign-in pages, health, readiness, GraphQL, web status). The workflow file does not invoke Playwright. Remote CI covers lint, typecheck, unit, migrate, integration, and build once it runs on `master`.
+- [x] Lint, typecheck, unit, integration, and relevant e2e tests pass — local on 2026-10-05: lint, typecheck, Vitest 37/37 with `RUN_INTEGRATION=1`, and Playwright 6/6 (`tests/e2e/phase0.spec.ts`: sign-in pages, health, readiness, GraphQL, web status). The workflow file does not invoke Playwright. Remote CI for `a0d709f` covered lint, typecheck, unit, migrate, integration, and build (run 37339984665).
 - [x] No commerce/CRM/accounting logic was added — `packages/commerce`, `packages/crm`, `packages/b2b`, `packages/accounting`, `packages/inventory`, `packages/procurement`, `packages/tax`, `packages/payments`, and `packages/ai` remain package-name boundaries.
 - [x] Documentation is updated — this section, the Phase 1 status line, roadmap §5 Current position, and `specs/phases/README.md` match `7de6c75`.
 - [x] No business logic in `apps/web` / `apps/admin` — both apps call the HTTP API (`/auth/sign-in`, GraphQL). They do not import a database client.
