@@ -41,6 +41,17 @@ Thumbs.db
 postgres-data/
 redis-data/
 
+# Aider local history (keep .aider.conf.yml)
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v4/
+
+# Third-party reference clones (read-only local trees; not canonical)
+references/vendure/
+references/erpnext/
+references/frappe-crm/
+references/frappe/
+
 # Misc
 .cache/
 .tmp/

@@ -1,10 +1,17 @@
 import { serve } from '@hono/node-server';
 import { closeDatabase, closeRedis, createLogger, getEnv, loadEnvFiles } from '@supercore/core';
+import { bootstrapSuperAdmin } from '@supercore/identity';
 import { createApp } from './app.js';
 
 loadEnvFiles();
 const env = getEnv();
 const logger = createLogger('api');
+
+if (env.BOOTSTRAP_SUPERADMIN_EMAIL && env.BOOTSTRAP_SUPERADMIN_PASSWORD) {
+  await bootstrapSuperAdmin(env.BOOTSTRAP_SUPERADMIN_EMAIL, env.BOOTSTRAP_SUPERADMIN_PASSWORD);
+  logger.info('Bootstrap super admin ensured');
+}
+
 const app = createApp();
 
 const server = serve({

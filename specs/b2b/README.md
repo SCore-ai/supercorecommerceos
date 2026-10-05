@@ -1,3 +1,5 @@
 # B2B
 
-Not specified in Phase 0.
+Canonical with CRM in **Phase 3**.
+
+Comparison: `references/frappe-crm/` for company/buyer **shape** only. Spec wins.

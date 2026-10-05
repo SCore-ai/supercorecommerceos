@@ -17,6 +17,8 @@ const envSchema = z.object({
     .enum(['true', 'false'])
     .default('false')
     .transform((value) => value === 'true'),
+  BOOTSTRAP_SUPERADMIN_EMAIL: z.union([z.string().email(), z.literal('')]).optional(),
+  BOOTSTRAP_SUPERADMIN_PASSWORD: z.string().optional(),
   OPENAI_API_KEY: z.string().optional(),
   HMRC_CLIENT_ID: z.string().optional(),
   HMRC_CLIENT_SECRET: z.string().optional(),

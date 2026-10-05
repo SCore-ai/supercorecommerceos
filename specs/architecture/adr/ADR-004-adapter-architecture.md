@@ -3,10 +3,11 @@
 ## Context
 
 Integrations must not own Supercore business logic.
+Vendure and ERPNext must not be treated as required runtimes.
 
 ## Decision
 
-Define provider interfaces only:
+Define provider interfaces:
 
 - CommerceProvider
 - AccountingProvider
@@ -20,13 +21,27 @@ Define provider interfaces only:
 - SearchProvider
 - FileStorageProvider
 
-No provider implementations ship in Phase 0.
+Canonical implementations (later phases, still Supercore-owned):
+
+- SupercoreCommerceProvider
+- SupercoreCRMProvider
+- SupercoreAccountingProvider
+- SupercoreTaxProvider
+
+Optional unscheduled adapters (not a delivery commitment):
+
+- VendureCommerceProvider
+- FrappeCRMProvider
+- ERPNextAccountingProvider
+
+No external provider implementations ship in Phase 0 or Phase 1.
 
 ## Alternatives
 
-- Embed a specific engine in the domain: rejected
-- Delay all interfaces until Phase 1: rejected; boundaries are cheaper now
+- Embed Vendure/ERPNext/Frappe in the domain: rejected
+- Skip interfaces until an external vendor is chosen: rejected; boundaries stay
 
 ## Consequences
 
-Future adapters implement these interfaces. Domain code depends on the interface, not the vendor.
+A later phase may add an optional adapter without rewriting canonical engines.
+Absence of Vendure/ERPNext/Frappe is the default.

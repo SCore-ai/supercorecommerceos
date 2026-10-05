@@ -15,3 +15,13 @@ Phase 0 coverage includes:
 - PostgreSQL and Redis connectivity when Docker is available
 - BullMQ `system.health.check`
 - web and admin shells
+
+Phase 1 adds:
+
+- tenant slug parsing
+- origin allow-list
+- tenant lifecycle transitions
+- scrypt password hashing
+- RBAC owner-type address writes
+- GraphQL `me` requires authentication
+- integration (Docker): tenant isolation, last tenant_admin lockout

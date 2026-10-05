@@ -22,4 +22,4 @@ Accounting is not implemented in Phase 0, but JavaScript numbers are unsafe for 
 
 ## Consequences
 
-Accounting Phase must follow this strategy or replace it with a new ADR before writing ledger code. Do not invent VAT or invoice rules in Phase 0.
+Phase 5 (Supercore Accounting Engine) must follow this strategy or replace it with a new ADR before writing ledger code. Do not invent VAT or invoice rules in Phase 0. ERPNext is not required.

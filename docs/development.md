@@ -1,5 +1,7 @@
 # Development
 
+AI tool roles (Cursor / Lovable / Aider): `docs/tooling.md` and `specs/architecture/Supercore Commerce OS — Development Agent Architecture v1.0.md`.
+
 ## Prerequisites
 
 - Node.js 24 LTS
@@ -7,6 +9,8 @@
 - Docker Desktop
 
 Copy `.env.example` to `.env`. Do not commit `.env`. Local Docker maps PostgreSQL to `5433` and Redis to `6380`.
+
+Optional Phase 1 Super Admin bootstrap (development only): set `BOOTSTRAP_SUPERADMIN_EMAIL` and `BOOTSTRAP_SUPERADMIN_PASSWORD` (min 12 characters). The API creates that platform user on startup if it does not exist.
 
 ## Local infrastructure
 

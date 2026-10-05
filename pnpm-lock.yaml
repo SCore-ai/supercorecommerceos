@@ -337,6 +337,9 @@ importers:
       '@supercore/core':
         specifier: workspace:*
         version: link:../core
+      drizzle-orm:
+        specifier: 'catalog:'
+        version: 0.45.2(postgres@3.4.9)
     devDependencies:
       '@types/node':
         specifier: ^24.5.2

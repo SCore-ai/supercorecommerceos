@@ -20,6 +20,9 @@ export function AppShell({
             <Link className="hover:underline" href="/">
               Home
             </Link>
+            <Link className="hover:underline" href="/sign-in">
+              Sign in
+            </Link>
             <Link className="hover:underline" href="/status">
               Status
             </Link>

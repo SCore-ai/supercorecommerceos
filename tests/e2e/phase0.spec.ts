@@ -4,16 +4,14 @@ const API_URL = process.env.API_URL ?? 'http://127.0.0.1:4000';
 const WEB_URL = process.env.WEB_URL ?? 'http://127.0.0.1:3000';
 const ADMIN_URL = process.env.ADMIN_URL ?? 'http://127.0.0.1:3001';
 
-test('web application loads', async ({ page }) => {
-  await page.goto(WEB_URL);
-  await expect(page.getByRole('heading', { name: 'Web' })).toBeVisible();
-  await expect(page.getByText('Phase 0 web application shell')).toBeVisible();
+test('web sign-in page loads', async ({ page }) => {
+  await page.goto(`${WEB_URL}/sign-in`);
+  await expect(page.getByRole('heading', { name: 'Sign in' })).toBeVisible();
 });
 
-test('admin application loads', async ({ page }) => {
-  await page.goto(ADMIN_URL);
-  await expect(page.getByRole('heading', { name: 'Admin', exact: true })).toBeVisible();
-  await expect(page.getByText('Phase 0 admin application shell')).toBeVisible();
+test('admin sign-in page loads', async ({ page }) => {
+  await page.goto(`${ADMIN_URL}/sign-in`);
+  await expect(page.getByRole('heading', { name: 'Sign in' })).toBeVisible();
 });
 
 test('API health works', async ({ request }) => {

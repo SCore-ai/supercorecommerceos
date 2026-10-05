@@ -1,3 +1,6 @@
 # Payments
 
-Not specified in Phase 0. No payment gateway integration.
+Payment capture: Phase 2 via `PaymentProvider`.
+AR/AP payment documents: Phase 5 Accounting.
+
+No dedicated payment-gateway phase. Processor IDs are never canonical PKs.

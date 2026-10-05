@@ -3,8 +3,9 @@ import { getRequestContext } from './correlation.js';
 import { getTenantContext } from './tenant.js';
 
 const redactedPaths = [
-  'password',
-  'token',
+      'password',
+      'passwordHash',
+      'token',
   'accessToken',
   'refreshToken',
   'apiKey',

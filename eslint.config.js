@@ -13,6 +13,7 @@ export default tseslint.config(
       '**/test-results/**',
       '**/*.md',
       '**/*.docx',
+      'references/**',
     ],
   },
   js.configs.recommended,

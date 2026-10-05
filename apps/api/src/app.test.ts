@@ -65,4 +65,18 @@ describe('API health endpoints', () => {
     expect(body.data.health.status).toBe('ok');
     expect(body.data.health.service).toBe('api');
   });
+
+  it('requires authentication for GraphQL me', async () => {
+    installTestEnv();
+    const { createApp } = await import('./app.js');
+    const app = createApp();
+    const response = await app.request('/graphql', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ query: '{ me { email } }' }),
+    });
+    expect(response.status).toBe(200);
+    const body = (await response.json()) as { errors?: Array<{ message: string }> };
+    expect(body.errors?.[0]?.message).toMatch(/Authentication required/i);
+  });
 });

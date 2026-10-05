@@ -11,7 +11,10 @@
 - No production schema sync. Migrations only.
 - No destructive migrations without explicit approval.
 
-Phase 0 schema contains only `system_meta`. There are no commerce/CRM/accounting tables.
+Phase 0 schema contains `system_meta`.
+Phase 1 adds tenants, organisations, users, sessions, invitations, customers, suppliers, addresses, countries, currencies, and audit_records. Migrations live in `packages/core/drizzle` (ADR-009).
+
+Country and currency rows are seeded from ISO 3166-1 and ISO 4217 after migrate.
 
 ## Commands
 

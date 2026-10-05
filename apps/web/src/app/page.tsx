@@ -1,31 +1,55 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components/app-shell';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchApiHealth, getPublicApiUrl } from '@/lib/api';
+import { fetchMe, graphqlRequest, signOutRequest, type MeUser } from '@/lib/api';
 
-export const dynamic = 'force-dynamic';
+export default function WebHomePage() {
+  const router = useRouter();
+  const [user, setUser] = useState<MeUser | null | undefined>(undefined);
+  const [tenantName, setTenantName] = useState<string | null>(null);
 
-export default async function HomePage() {
-  let apiStatus = 'unreachable';
-  try {
-    const health = await fetchApiHealth(getPublicApiUrl());
-    apiStatus = health.status;
-  } catch {
-    apiStatus = 'unreachable';
+  useEffect(() => {
+    void fetchMe().then((value) => {
+      if (!value) {
+        router.replace('/sign-in');
+        return;
+      }
+      setUser(value);
+      void graphqlRequest<{ me: { tenant: { name: string } | null } }>('{ me { tenant { name } } }').then((payload) => {
+        setTenantName(payload.me.tenant?.name ?? 'Platform');
+      });
+    });
+  }, [router]);
+
+  if (user === undefined || !user) {
+    return <p className="p-8 text-sm text-muted-foreground">Loading…</p>;
   }
 
   return (
     <AppShell title="Web">
-      <div className="grid gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Platform shell</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
-            <p>This is the Phase 0 web application shell. Commerce screens are not implemented yet.</p>
-            <p>API connectivity: {apiStatus}</p>
-          </CardContent>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Signed in</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2 text-sm text-muted-foreground">
+          <p>
+            {user.name} ({user.email})
+          </p>
+          <p>Tenant: {tenantName ?? '…'}</p>
+          <button
+            className="underline"
+            type="button"
+            onClick={() => {
+              void signOutRequest().then(() => router.replace('/sign-in'));
+            }}
+          >
+            Sign out
+          </button>
+        </CardContent>
+      </Card>
     </AppShell>
   );
 }

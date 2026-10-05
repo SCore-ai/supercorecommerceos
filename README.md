@@ -2,9 +2,24 @@
 
 Modular monolith foundation for Supercore's long-lived Commerce OS.
 
-Phase 0 is platform bootstrap only. It does not implement commerce, CRM, accounting, tax, inventory, payments, or AI agents.
+Phase 0 is platform bootstrap. Phase 1 adds first-party auth, tenants, organisations, users, customers, suppliers, addresses, countries, currencies, and audit.
+
+Optional local Super Admin (never commit a real password):
+
+```
+BOOTSTRAP_SUPERADMIN_EMAIL=you@localhost
+BOOTSTRAP_SUPERADMIN_PASSWORD=choose-a-long-password
+```
+
+Then `pnpm db:migrate` and `pnpm --filter @supercore/api dev`. The API creates the Super Admin on startup if those env vars are set and no platform user exists yet.
 
 This is a greenfield repository. There is no migration from Shopify, Vendure, Saleor, ERPNext, Frappe CRM, or any other external platform.
+
+Those systems remain optional replaceable adapters only. They are not installed in Phase 0–1 and have no dedicated phase. Supercore owns Commerce, CRM, Accounting, and Tax engines.
+
+Phase sequence: 0 Foundation → 1 Platform Core → 2 Commerce → 3 B2B+CRM → 4 ERP foundations → 5 Accounting → 6 Tax/VAT → 7 AI.
+
+Canonical documents: `specs/phases/` and `specs/architecture/`.
 
 ## Requirements
 
