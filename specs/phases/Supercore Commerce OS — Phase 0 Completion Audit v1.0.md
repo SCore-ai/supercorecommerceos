@@ -5,9 +5,9 @@
 **Date:** 2026-09-17  
 **Source:** Phase 0 Bootstrap Master Prompt v1.0  
 **Result:** Phase 0 foundation is **locally reported complete**. No Vendure, ERPNext, or Frappe CRM implementation was added.  
-**Remote CI:** not independently confirmed. `.github/workflows/ci.yml` exists; it triggers on `main` while this repository’s default branch is `master`.
+**Remote CI:** not independently confirmed on this audit’s original pass. `.github/workflows/ci.yml` triggered on `main` while the default branch is `master`, so `7de6c75` produced no Actions run. The Phase 1 close-out points the push trigger at `master`. Objective 22 stays open until that run’s URL is recorded.
 
-Next implementation phase is **Phase 1 — Platform Core**, only after that specification is approved. That condition is the approval gate, not a contradiction.
+Phase 1 Platform Core code is on `master` at `7de6c75`. This file remains the Phase 0 report. It is not approval to start Phase 2.
 
 ---
 
@@ -55,7 +55,7 @@ Read-only comparison clones may exist under `references/` (gitignored). They are
 | 19 | Validation (Zod) | Done |
 | 20 | Vitest | Done |
 | 21 | Playwright | Done |
-| 22 | GitHub Actions | Workflow file present (`.github/workflows/ci.yml`). Live run on `master` not confirmed. |
+| 22 | GitHub Actions | Workflow file present (`.github/workflows/ci.yml`). Push trigger corrected from `main` to `master` in the Phase 1 close-out. Live run URL not yet recorded. |
 | 23 | Security baseline | Done (headers, CORS, rate-limit abstraction, secrets isolation) |
 | 24 | AGENTS.md | Done |
 | 25 | Architecture specs | Done |
@@ -92,7 +92,7 @@ Known non-blockers (allowed by the Master Prompt):
 - NGINX is a placeholder, not a production topology
 - Apps run on the host; only Postgres/Redis are containerised
 - `services/ai` and `services/integration` are placeholders
-- Auth is an interface, not a complete identity product (Phase 1)
+- Auth was an interface in Phase 0. Phase 1 implemented first-party auth at `7de6c75`.
 - GraphQL uses Yoga schema/execute rather than Yoga’s HTTP fetch adapter (endpoint works)
 - Live GitHub Actions run should be confirmed on the remote after push
 
@@ -132,6 +132,6 @@ ChatGPT or other agents must not restore Vendure/ERPNext as required platforms o
 
 Phase 0 coding matches the Bootstrap Master Prompt Definition of Done **as a local report**. Treat it as complete for foundation scope once a later evidence pass binds logs and remote CI to a commit. Do not treat “CI file present” as “CI passed”.
 
-Next implementation phase is **Phase 1 — Platform Core**, after that spec is approved.
+Phase 1 Platform Core is implemented at `7de6c75`. Phase 2 still needs an approved addendum. Do not start Phase 2 code from this audit.
 
 Vendure and ERPNext remain optional future adapters only. They are not on the delivery path.

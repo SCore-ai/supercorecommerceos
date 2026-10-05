@@ -138,9 +138,9 @@ Canonical: `specs/architecture/Supercore Commerce OS — Development Agent Archi
 
 # 5. Current position
 
-Phase 0 foundation is in the repository (see Phase 0 Completion Audit). Local checks were reported during implementation. Remote CI evidence is still pending.
+Phase 0 foundation is in the repository (see Phase 0 Completion Audit). Local checks were reported during implementation. Remote CI did not run on `7de6c75` because `.github/workflows/ci.yml` triggered on `main` while the default branch is `master`. The close-out points that trigger at `master`. Phase 0 objective 22 stays open until an Actions run URL is bound to the close-out commit.
 
-Phase 1 is specified. **§17 blockers are closed** (2026-10-05; ADR-006 amendment, ADR-009). Coding still waits for explicit approval of this spec.
+Phase 1 Platform Core is implemented on `master` at `7de6c75` (2026-10-05, full SHA `7de6c75c9bcd1dbe70b725d18b8088580c5497ea`). That commit has first-party auth, session-derived tenant isolation, RBAC, customer and supplier master data, addresses, country and currency seed, and same-transaction audit. **§17 blockers are closed** (same day; ADR-006 amendment, ADR-009). **§15 Definition of Done is aligned to that commit.** Phase 2 code has not started.
 
 Phases 2–7 are direction charters. Detailed pricing, VAT rates, ledger charts, and checkout rules are **not invented** here. Each phase needs an approved addendum before those rules are coded.
 

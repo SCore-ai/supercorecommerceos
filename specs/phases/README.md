@@ -4,14 +4,14 @@ This folder is the **only** phase document source: one Markdown file per phase, 
 
 Authoritative sequence: **Product Vision and Phase Roadmap v1.1**.
 
-Phase 1 is **Draft** — §17 closed; coding starts only after explicit approval of that spec.
+Phase 1 Platform Core is **implemented** on `master` at `7de6c75` (2026-10-05). §15 is aligned to that commit. Phase 2 code has not started.
 
 | File | Role |
 |---|---|
 | Product Vision and Phase Roadmap v1.1 | Active sequence (P0–P7) |
 | Phase 0 Bootstrap Master Prompt | Historical foundation prompt |
-| Phase 0 Completion Audit | Local completion report; remote CI still pending |
-| Phase 1 Platform Core | Implementation spec — §17 closed; approve before coding |
+| Phase 0 Completion Audit | Local completion report; remote CI run still to be bound after the workflow listens to `master` |
+| Phase 1 Platform Core | Implementation spec — code on `7de6c75`; §15 aligned 2026-10-05 |
 | Phase 2 Supercore Commerce Engine | Charter |
 | Phase 3 Supercore B2B and CRM | Charter |
 | Phase 4 ERP / Inventory / Procurement | Charter |

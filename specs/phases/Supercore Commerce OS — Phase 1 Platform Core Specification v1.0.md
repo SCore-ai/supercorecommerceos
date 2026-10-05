@@ -3,11 +3,12 @@
 ## Phase 1 — Platform Core Specification v1.0
 
 **Document type:** Implementation specification  
-**Status:** Draft — §17 blockers closed 2026-10-05; coding still requires explicit approval  
+**Status:** Implemented on `master` at `7de6c75` (2026-10-05). §15 aligned to that commit. Phase 2 code has not started.  
 **Depends on:** Phase 0 complete  
 **Does not include:** Commerce, CRM, accounting, tax, inventory, payments, AI agents  
 **Date:** 2026-09-17  
-**§17 closed:** 2026-10-05 (ADR-006 amendment, ADR-009)
+**§17 closed:** 2026-10-05 (ADR-006 amendment, ADR-009)  
+**§15 aligned:** 2026-10-05 (`7de6c75`)
 
 ---
 
@@ -553,22 +554,26 @@ Minimum:
 
 # 15. Definition of done
 
-Phase 1 is complete only when:
+Aligned 2026-10-05 to `master` commit `7de6c75` (`7de6c75c9bcd1dbe70b725d18b8088580c5497ea`). Phase 2 code has not started.
+
+Local checks on that tree, re-run during this close-out: lint pass, typecheck pass, Vitest **37/37** with `RUN_INTEGRATION=1` (32 unit tests plus Postgres, Redis, worker, and `packages/identity/src/phase1.integration.test.ts`), and Playwright **6/6**. GitHub Actions did not run on `7de6c75` because the workflow listened to `main`. The trigger is corrected to `master` in the close-out; the Actions run is for that later commit and is recorded under Phase 0 objective 22.
 
 - [x] Section 17 blockers are closed by product/security (ADR-006 amendment, ADR-009)
-- [ ] Migrations create the Phase 1 tables
-- [ ] First-party sign-in works
-- [ ] Tenant context is session-derived
-- [ ] RBAC denies unauthorised writes
-- [ ] Customer and supplier CRUD works inside a tenant
-- [ ] Address CRUD works
-- [ ] Country and currency reference data is available
-- [ ] Audit records persist
-- [ ] Admin screens exist for the entities above (production UI in this repo, not a Lovable-only export)
-- [ ] Lint, typecheck, unit, integration, and relevant e2e tests pass
-- [ ] No commerce/CRM/accounting logic was added
-- [ ] Documentation is updated
-- [ ] No business logic in `apps/web` / `apps/admin`
+- [x] Migrations create the Phase 1 tables — `packages/core/drizzle/0001_phase1_platform_core.sql` (tenants, organizations, users, memberships, roles, sessions, invitations, countries, currencies, customers, suppliers, addresses, audit_records)
+- [x] First-party sign-in works — `POST /auth/sign-in`. Super Admin is email + password with no `tenantSlug`. Tenant user is email + password + `tenantSlug`. Integration test bootstraps a Super Admin, provisions a tenant, activates a tenant admin, and signs that user in with the slug.
+- [x] Tenant context is session-derived — AsyncLocalStorage `TenantContext` (`session` or `internal` only). `apps/api` rejects a client `tenantId` (`apps/api/src/app.test.ts`).
+- [x] RBAC denies unauthorised writes — `packages/identity/src/rbac.test.ts` (sales cannot write suppliers; viewer has no `customer.write`). Last active `tenant_admin` cannot be disabled or demoted (integration test).
+- [x] Customer and supplier CRUD works inside a tenant — GraphQL create/update plus `createCustomerRecord` / `createSupplierRecord`. Integration test asserts a customer created in tenant A is invisible from tenant B. Supplier uses the same party path; there is no separate supplier integration case.
+- [x] Address CRUD works — GraphQL `createAddress` / `updateAddress` accept organisation, customer, or supplier owner. Admin UI at `apps/admin/src/app/addresses/page.tsx` creates **customer** addresses. Supplier and organisation address writes are API-level in this commit.
+- [x] Country and currency reference data is available — `seedReferenceData()` runs at the end of `pnpm db:migrate` (ISO countries and currencies).
+- [x] Audit records persist — party, address, and tenant mutations call `insertAuditRecord` in the same Postgres transaction as the write.
+- [x] Admin screens exist for the entities above (production UI in this repo, not a Lovable-only export) — `apps/admin` sign-in, tenants, tenant, organizations, users, customers, suppliers, addresses, audit. Screens call the HTTP API.
+- [x] Lint, typecheck, unit, integration, and relevant e2e tests pass — local on 2026-10-05: lint, typecheck, Vitest 37/37 with `RUN_INTEGRATION=1`, and Playwright 6/6 (`tests/e2e/phase0.spec.ts`: sign-in pages, health, readiness, GraphQL, web status). The workflow file does not invoke Playwright. Remote CI covers lint, typecheck, unit, migrate, integration, and build once it runs on `master`.
+- [x] No commerce/CRM/accounting logic was added — `packages/commerce`, `packages/crm`, `packages/b2b`, `packages/accounting`, `packages/inventory`, `packages/procurement`, `packages/tax`, `packages/payments`, and `packages/ai` remain package-name boundaries.
+- [x] Documentation is updated — this section, the Phase 1 status line, roadmap §5 Current position, and `specs/phases/README.md` match `7de6c75`.
+- [x] No business logic in `apps/web` / `apps/admin` — both apps call the HTTP API (`/auth/sign-in`, GraphQL). They do not import a database client.
+
+Browser Super Admin smoke (sign-in with no slug, provision a tenant, tenant-user sign-in with `tenantSlug`) is covered at the service layer by the integration test. It was not re-run as a clicked admin session in this close-out.
 
 ---
 

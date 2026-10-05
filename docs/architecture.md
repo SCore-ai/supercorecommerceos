@@ -36,7 +36,7 @@ Development agents: `specs/architecture/Supercore Commerce OS — Development Ag
 
 ```
 Phase 0 Foundation
-  → Phase 1 Platform Core (draft — §17 closed; approve before coding)
+  → Phase 1 Platform Core (on master at 7de6c75; Phase 2 not started)
   → Phase 2 Supercore Commerce Engine
   → Phase 3 Supercore B2B + CRM
   → Phase 4 ERP / Inventory / Procurement foundations
