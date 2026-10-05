@@ -53,7 +53,7 @@ Clone recreation and ignore rules: `references/README.md`.
 # 3. Rules for Cursor (and any agent)
 
 1. Read the **phase spec** first.
-2. You may search `references/` when the human asks, or when a modelling question is underspecified **and** you then stop rather than invent. Phase 1 §17 closures and later implementation prompts should look up those trees and cite paths.
+2. When the human issues a prompt that needs spec approval, modelling, information, or coding, search `references/` for the relevant slice, cite the path, and take details that help. The trees stay in the project folder. Do not skip the lookup because a phase already closed.
 3. Quote paths under `references/` when you use them, so the choice is reviewable.
 4. Do not `import` those trees into `@supercore/*`.
 5. Do not copy their SQL, GraphQL schema, or Python DocTypes into production.

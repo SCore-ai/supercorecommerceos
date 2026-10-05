@@ -1,0 +1,14 @@
+---
+description: Storefront is presentation only; Vendure GraphQL is the commerce API
+globs: apps/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Frontend
+
+Any storefront talks to **Vendure GraphQL** over HTTP.
+
+- No business rules, tax, or stock logic in the client
+- No Frappe/ERPNext calls from the browser
+- No database clients
+- Do not copy Vendure Admin UI

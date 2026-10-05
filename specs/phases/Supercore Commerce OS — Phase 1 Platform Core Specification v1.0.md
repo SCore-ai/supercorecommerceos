@@ -3,12 +3,13 @@
 ## Phase 1 — Platform Core Specification v1.0
 
 **Document type:** Implementation specification  
-**Status:** Implemented on `master` at `7de6c75` (2026-10-05). §15 aligned to that commit. Phase 2 code has not started.  
+**Status:** Implemented on `master` at `7de6c75` (2026-10-05). §15 aligned in `a0d709f`. Product close-out approved 2026-10-05.  
 **Depends on:** Phase 0 complete  
 **Does not include:** Commerce, CRM, accounting, tax, inventory, payments, AI agents  
 **Date:** 2026-09-17  
 **§17 closed:** 2026-10-05 (ADR-006 amendment, ADR-009)  
-**§15 aligned:** 2026-10-05 (`7de6c75`)
+**§15 aligned:** 2026-10-05 (`7de6c75`, recorded in `a0d709f`)  
+**Close-out approved:** 2026-10-05
 
 ---
 
@@ -570,7 +571,7 @@ Local checks on that tree, re-run during this close-out: lint pass, typecheck pa
 - [x] Admin screens exist for the entities above (production UI in this repo, not a Lovable-only export) — `apps/admin` sign-in, tenants, tenant, organizations, users, customers, suppliers, addresses, audit. Screens call the HTTP API.
 - [x] Lint, typecheck, unit, integration, and relevant e2e tests pass — local on 2026-10-05: lint, typecheck, Vitest 37/37 with `RUN_INTEGRATION=1`, and Playwright 6/6 (`tests/e2e/phase0.spec.ts`: sign-in pages, health, readiness, GraphQL, web status). The workflow file does not invoke Playwright. Remote CI for `a0d709f` covered lint, typecheck, unit, migrate, integration, and build (run 37339984665).
 - [x] No commerce/CRM/accounting logic was added — `packages/commerce`, `packages/crm`, `packages/b2b`, `packages/accounting`, `packages/inventory`, `packages/procurement`, `packages/tax`, `packages/payments`, and `packages/ai` remain package-name boundaries.
-- [x] Documentation is updated — this section, the Phase 1 status line, roadmap §5 Current position, and `specs/phases/README.md` match `7de6c75`.
+- [x] Documentation is updated — this section, the Phase 1 status line, roadmap §5 Current position, `specs/phases/README.md`, and `specs/README.md` match `7de6c75` / `a0d709f`.
 - [x] No business logic in `apps/web` / `apps/admin` — both apps call the HTTP API (`/auth/sign-in`, GraphQL). They do not import a database client.
 
 Browser Super Admin smoke (sign-in with no slug, provision a tenant, tenant-user sign-in with `tenantSlug`) is covered at the service layer by the integration test. It was not re-run as a clicked admin session in this close-out.

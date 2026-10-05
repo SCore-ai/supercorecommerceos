@@ -9,11 +9,10 @@ export default tseslint.config(
       '**/dist/**',
       '**/.next/**',
       '**/coverage/**',
-      '**/playwright-report/**',
-      '**/test-results/**',
       '**/*.md',
       '**/*.docx',
       'references/**',
+      'integrations/**',
     ],
   },
   js.configs.recommended,
@@ -35,15 +34,6 @@ export default tseslint.config(
         'error',
         { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
       ],
-    },
-  },
-  {
-    files: ['apps/web/**/*.{ts,tsx}', 'apps/admin/**/*.{ts,tsx}'],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
     },
   },
 );

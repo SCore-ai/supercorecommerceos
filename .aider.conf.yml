@@ -1,0 +1,7 @@
+auto-commits: false
+dirty: false
+gitignore: true
+read:
+  - AGENTS.md
+  - AIDER.md
+  - docs/tooling.md

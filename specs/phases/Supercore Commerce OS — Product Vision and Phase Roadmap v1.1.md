@@ -8,7 +8,8 @@
 **Primary implementation tool:** Cursor  
 **UI/UX prototyping:** Lovable  
 **Controlled patches:** Aider  
-**Date:** 2026-09-17
+**Date:** 2026-09-17  
+**Reference clones protocol:** 2026-10-05 (§2.1 — trees stay in `references/`; query on prompt)
 
 ---
 
@@ -49,17 +50,28 @@ They are not separate phases.
 
 We will not add Vendure or ERPNext merely because they exist.
 
-Local comparison trees (gitignored clones, not runtimes):
+## 2.1 Reference architecture clones (stay in the project)
 
-| Lookup | Path |
-|---|---|
-| Commerce patterns | `references/vendure/` |
-| CRM patterns | `references/frappe-crm/` |
-| Accounting / stock / buying | `references/erpnext/` |
-| Frappe framework | `references/frappe/` |
+Vendure, ERPNext, Frappe CRM, and the Frappe framework **remain in this project folder** as read-only reference architecture and code. They stay under `references/`. They are not deleted when a phase closes. They are not installed runtimes. They are not numbered phases.
 
-Binding usage: `specs/architecture/Supercore Commerce OS — External Reference Clones v1.0.md`.  
-Spec and ADR always beat a pattern found in those trees.
+| Lookup | Path | Stays in the repo as |
+|---|---|---|
+| Commerce patterns | `references/vendure/` | Reference architecture / code |
+| CRM patterns | `references/frappe-crm/` | Reference architecture / code |
+| Accounting / stock / buying | `references/erpnext/` | Reference architecture / code |
+| Frappe framework | `references/frappe/` | Reference architecture / code |
+
+When a human issues a prompt that needs spec approval, modelling, information, or coding, Cursor **must query those trees** for the relevant slice, cite the path used, and may take details that help the work. That lookup does not install those products.
+
+Hard limits (unchanged):
+
+- Specs and ADRs beat a pattern found in a clone.
+- Do not copy clone business rules into Supercore unless an approved spec or ADR already allows that rule.
+- Do not `import` `references/` into `apps/` or `@supercore/*`.
+- Do not copy their SQL, GraphQL schema, or Python DocTypes into production.
+- Optional adapters stay unscheduled.
+
+Binding usage: `specs/architecture/Supercore Commerce OS — External Reference Clones v1.0.md`.
 
 If a later phase needs a temporary or comparative external engine, it is evaluated as an adapter only:
 
@@ -140,9 +152,9 @@ Canonical: `specs/architecture/Supercore Commerce OS — Development Agent Archi
 
 Phase 0 foundation is in the repository (see Phase 0 Completion Audit). Local checks were reported during implementation. Remote CI did not run on `7de6c75` because `.github/workflows/ci.yml` triggered on `main` while the default branch is `master`. The close-out points that trigger at `master`. [Actions run 37339984665](https://github.com/SCore-ai/supercorecommerceos/actions/runs/37339984665) succeeded for `a0d709f`.
 
-Phase 1 Platform Core is implemented on `master` at `7de6c75` (2026-10-05, full SHA `7de6c75c9bcd1dbe70b725d18b8088580c5497ea`). That commit has first-party auth, session-derived tenant isolation, RBAC, customer and supplier master data, addresses, country and currency seed, and same-transaction audit. **§17 blockers are closed** (same day; ADR-006 amendment, ADR-009). **§15 Definition of Done is aligned to that commit.** Phase 2 code has not started.
+Phase 1 Platform Core is implemented on `master` at `7de6c75` (2026-10-05, full SHA `7de6c75c9bcd1dbe70b725d18b8088580c5497ea`). That commit has first-party auth, session-derived tenant isolation, RBAC, customer and supplier master data, addresses, country and currency seed, and same-transaction audit. **§17 blockers are closed** (same day; ADR-006 amendment, ADR-009). **§15 Definition of Done is aligned to that commit** (recorded in `a0d709f`). Product close-out approved 2026-10-05.
 
-Phases 2–7 are direction charters. Detailed pricing, VAT rates, ledger charts, and checkout rules are **not invented** here. Each phase needs an approved addendum before those rules are coded.
+Phase 2 first-slice addendum is closed (2026-10-05). Catalog, cart, authenticated checkout, orders, sellable quantity, and stub capture are in this repository. Later Phase 2 slices (shipment/return/refund documents, discounts) still need their own addendum. Phase 3 first decisions are approved in Phase 3 Addendum First Decisions v1.0 (2026-10-05). The first slice copies deal probabilities, sales-tax rows, and the credit formula into `@supercore/crm` and `@supercore/b2b`. Phases 4–7 remain direction charters.
 
 ---
 
@@ -239,12 +251,12 @@ Cursor: production architecture, APIs, tests, and porting that UI into `apps/web
 
 Details: `specs/architecture/Supercore Commerce OS — Development Agent Architecture v1.0.md`.
 
-During implementation, Cursor may look up `references/` as in External Reference Clones v1.0. That lookup does not install those products and does not replace this roadmap.
+During spec work, approvals, and implementation prompts, Cursor **queries** `references/vendure`, `references/erpnext`, `references/frappe-crm`, and `references/frappe` when the task needs comparison architecture or code. Cite paths. Take details that help. Do not treat those trees as engines, and do not replace this roadmap. See §2.1.
 
 ---
 
 # 9. Approval
 
-Phase 1 coding starts only after the Phase 1 Platform Core Specification is **explicitly approved**. §17 blockers in that spec are closed (2026-10-05).
+Phase 1 Platform Core was **explicitly approved** and is implemented on `master` at `7de6c75` (2026-10-05). §17 blockers are closed. §15 is aligned to that commit. Remote CI succeeded for `a0d709f` ([Actions run 37339984665](https://github.com/SCore-ai/supercorecommerceos/actions/runs/37339984665)). Phase 2 first-slice addendum is closed (2026-10-05); later Phase 2 slices still need their own addendum.
 
 Later phases start only after their specification (and any required addendum) is approved.

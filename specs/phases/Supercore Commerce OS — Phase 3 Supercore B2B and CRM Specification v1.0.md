@@ -3,9 +3,10 @@
 ## Phase 3 — Supercore B2B and CRM Specification v1.0
 
 **Document type:** Phase charter  
-**Status:** Draft direction  
+**Status:** Charter — first decisions approved 2026-10-05 in Phase 3 Addendum First Decisions v1.0. First slice is in `@supercore/crm` and `@supercore/b2b`.  
 **Depends on:** Phase 1; catalog/order from Phase 2 where quotes convert  
-**Date:** 2026-09-17
+**Date:** 2026-09-17  
+**Addendum approved:** 2026-10-05
 
 ---
 
@@ -47,7 +48,7 @@ CRMProvider
 
 Do not implement Frappe unless a later spec asks for it.
 
-A CRM Account may link to a Phase 1 Customer. The rule for when they are the same party is an addendum item — do not invent it in code.
+A CRM Account links to a Phase 1 Customer only when `customerId` is set. That rule is closed in Phase 3 Addendum First Decisions v1.0 §2.1. Do not invent another match.
 
 Quotes that convert to orders use Phase 2 commerce. CRM does not become a second order engine.
 
@@ -62,12 +63,20 @@ Quotes that convert to orders use Phase 2 commerce. CRM does not become a second
 
 ---
 
-# 4. Out of scope until addendum
+# 4. Closed by addendum, and still out of scope
 
-- Pipeline stage names and probabilities
-- Lead scoring
-- Quantity-break formulas
-- Credit holds
+Closed in Phase 3 Addendum First Decisions v1.0 (do not reopen in code):
+
+- Account is the same party as a Customer only via explicit `customerId`
+- Pipeline stage names, outcomes, and the Frappe probability percents (10, 25, 50, 70, 90, 100, 0)
+- No lead scoring
+- No quantity-break formulas; catalog access is an allow-list of Phase 2 products
+- Credit limit uses the ERPNext outstanding formula (GL + unbilled order + unbilled delivery)
+- Quote tax rows use the ERPNext charge types; conversion calls Phase 2 `addCartLine` and `placeOrderRecord`
+- B2B buyer is a Phase 1 User membership on the Account
+
+Still out of scope:
+
 - Punchout / EDI
 - Marketing automation
 - HubSpot / Salesforce / Frappe as system of record
@@ -108,7 +117,7 @@ Optional small patch. No CRM product rules.
 
 # 7. Reference lookup
 
-Primary comparison tree: `references/frappe-crm/` (framework: `references/frappe/`).
+Primary comparison tree: `references/frappe-crm/` (framework: `references/frappe/`). ERPNext and Vendure were also read for customer, quotation, credit, and portal shape.
 
-Use it for lead/deal/organization **shape**. Frappe is not the system of record. Canonical: `specs/architecture/Supercore Commerce OS — External Reference Clones v1.0.md`.
+Use them for shape. Frappe is not the system of record. The approved decisions and the rejected clone rules are in Phase 3 Addendum First Decisions v1.0. Canonical: `specs/architecture/Supercore Commerce OS — External Reference Clones v1.0.md`.
 

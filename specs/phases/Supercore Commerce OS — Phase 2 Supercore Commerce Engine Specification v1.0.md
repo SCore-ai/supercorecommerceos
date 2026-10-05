@@ -3,7 +3,7 @@
 ## Phase 2 — Supercore Commerce Engine Specification v1.0
 
 **Document type:** Phase charter  
-**Status:** Draft direction — pricing/checkout math not invented here  
+**Status:** First slice addendum closed 2026-10-05 — see Phase 2 Addendum First Slice v1.0  
 **Depends on:** Phase 1 Platform Core  
 **Date:** 2026-09-17
 

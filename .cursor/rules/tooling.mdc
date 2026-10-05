@@ -1,0 +1,13 @@
+---
+description: Cursor is primary engineer; Lovable is storefront prototype only
+alwaysApply: true
+---
+
+# Tooling roles
+
+- **Cursor** (this agent): specs, ADRs, Vendure→Frappe bridge, tests, git.
+- **Lovable**: storefront UI prototype only. Wire to **Vendure GraphQL**, never Frappe, never a database.
+- **Aider**: named small patches. No architecture rewrites.
+- **Codex**: not used.
+
+Follow `AGENTS.md` and ADR-010. `references/` is comparison only. Do not import those trees.
